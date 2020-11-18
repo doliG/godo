@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/doliG/godo/db"
 	"github.com/doliG/godo/printer"
@@ -24,8 +25,8 @@ func main() {
 	switch os.Args[1] {
 	case "add":
 		addCmd.Parse(os.Args[2:])
-		fmt.Println("subcommand 'add'")
-		fmt.Println("  tail:", addCmd.Args())
+		name := strings.Join(addCmd.Args(), " ")
+		add(name)
 
 	case "list":
 		listCmd.Parse(os.Args[2:])
@@ -49,4 +50,13 @@ func list(listAll bool) {
 	}
 
 	printer.PrintAll(visibleItems)
+}
+
+func add(name string) {
+	item := db.Todo{
+		Name:    name,
+		Created: "Now",
+		Done:    false,
+	}
+	db.Add(item)
 }

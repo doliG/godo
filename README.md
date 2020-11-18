@@ -19,3 +19,6 @@ godo add "Do something"
 # List todos
 godo list [--all|-a]
 ```
+
+## TODO
+- [ ] Find where to put the db file

@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gookit/color"
+	"github.com/doliG/godo/db"
+	"github.com/doliG/godo/printer"
 )
 
 func main() {
@@ -36,29 +37,16 @@ func main() {
 	}
 }
 
-type todo struct {
-	name    string
-	created string /* Should be a date */
-	done    bool   /* Should be a date */
-}
-
-var items = []todo{
-	{name: "Make a cake", created: "17 nov 11:15", done: false},
-	{name: "Do pushups", created: "15 nov 10:32", done: true},
-	{name: "Buy Nintendo switch controller", created: "15 nov 10:32", done: false},
-}
-
-/**
- * List
- */
 func list(listAll bool) {
-	for _, item := range items {
-		if item.done {
-			if listAll {
-				color.Gray.Println("- [x]", item.created, ":", item.name)
-			}
-		} else {
-			fmt.Println("- [ ]", item.created, ":", item.name)
+	todos := db.GetAll()
+
+	visibleItems := []db.Todo{}
+	for _, item := range todos {
+		if item.Done && !listAll {
+			continue
 		}
+		visibleItems = append(visibleItems, item)
 	}
+
+	printer.PrintAll(visibleItems)
 }

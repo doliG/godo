@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/doliG/godo/db"
 	"github.com/doliG/godo/printer"
@@ -55,7 +56,7 @@ func list(listAll bool) {
 func add(name string) {
 	item := db.Todo{
 		Name:    name,
-		Created: "Now",
+		Created: time.Now(),
 		Done:    false,
 	}
 	db.Add(item)

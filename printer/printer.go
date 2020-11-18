@@ -2,6 +2,7 @@ package printer
 
 import (
 	"fmt"
+
 	"github.com/doliG/godo/db"
 	"github.com/gookit/color"
 )
@@ -13,9 +14,10 @@ func PrintAll(items []db.Todo) {
 }
 
 func Print(item db.Todo) {
+	created := item.Created.Format("02 Jan, 15:04")
 	if item.Done {
-		color.Gray.Println("- [x]", item.Created, ":", item.Name)
+		color.Gray.Println("- [x]", created, ":", item.Name)
 	} else {
-		fmt.Println("- [ ]", item.Created, ":", item.Name)
+		fmt.Println("- [ ]", created, ":", item.Name)
 	}
 }

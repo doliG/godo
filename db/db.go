@@ -4,14 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"time"
 )
 
 const dbPath = "/tmp/godo_db.json"
 
 type Todo struct {
 	Name    string
-	Created string /* Should be a date */
-	Done    bool   /* Should be a date */
+	Created time.Time /* Should be a date */
+	Done    bool      /* Should be a date */
 }
 
 func GetAll() []Todo {

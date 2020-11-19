@@ -8,16 +8,16 @@ import (
 )
 
 func PrintAll(items []db.Todo) {
-	for _, item := range items {
-		Print(item)
+	for index, item := range items {
+		Print(index, item)
 	}
 }
 
-func Print(item db.Todo) {
+func Print(index int, item db.Todo) {
 	created := item.Created.Format("02 Jan, 15:04")
 	if item.Done {
-		color.Gray.Println("- [x]", created, ":", item.Name)
+		color.Gray.Printf("%d. %s: (done) %s\n", index, created, item.Name)
 	} else {
-		fmt.Println("- [ ]", created, ":", item.Name)
+		fmt.Printf("%d. %s : %s\n", index, created, item.Name)
 	}
 }

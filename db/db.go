@@ -59,6 +59,10 @@ func Add(item Todo) {
 	items := GetAll()
 	items = append(items, item)
 
+	UpdateAll(items)
+}
+
+func UpdateAll(items []Todo) {
 	jsoned, _ := json.Marshal(items)
 	err := ioutil.WriteFile(dbPath, jsoned, 0644)
 	if err != nil {

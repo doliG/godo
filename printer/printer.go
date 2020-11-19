@@ -7,8 +7,11 @@ import (
 	"github.com/gookit/color"
 )
 
-func PrintAll(items []db.Todo) {
+func PrintAll(items []db.Todo, printAll bool) {
 	for index, item := range items {
+		if item.Done && !printAll {
+			continue
+		}
 		Print(index, item)
 	}
 }

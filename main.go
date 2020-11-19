@@ -50,16 +50,7 @@ func main() {
 
 func list(listAll bool) {
 	todos := db.GetAll()
-
-	visibleItems := []db.Todo{}
-	for _, item := range todos {
-		if item.Done && !listAll {
-			continue
-		}
-		visibleItems = append(visibleItems, item)
-	}
-
-	printer.PrintAll(visibleItems)
+	printer.PrintAll(todos, listAll)
 }
 
 func add(name string) {
@@ -77,10 +68,10 @@ func toggle(ids []string) {
 	for _, id := range ids {
 		index, err := strconv.Atoi(id)
 		if err != nil {
-			color.Error.Println("Cannot convert", id, "into number, skipping...")
+			color.Warn.Tips("Cannot convert '%s' into number. Skipping...", id)
 			continue
 		} else if index < 0 || index > len(todos) {
-			color.Error.Println("Invalid id <", id, "> it must be between 0 and ", len(id), "skipping...")
+			color.Warn.Tips("Invalid id '%s'. It must be between 0 and %d. Skipping...", id, len(todos))
 			continue
 		}
 

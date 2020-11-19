@@ -70,11 +70,10 @@ func toggle(ids []string) {
 		if err != nil {
 			color.Warn.Tips("Cannot convert '%s' into number. Skipping...", id)
 			continue
-		} else if index < 0 || index > len(todos) {
-			color.Warn.Tips("Invalid id '%s'. It must be between 0 and %d. Skipping...", id, len(todos))
+		} else if index < 0 || index >= len(todos) {
+			color.Warn.Tips("Invalid id '%s'. It must be  >0 and <%d. Skipping...", id, len(todos))
 			continue
 		}
-
 		todos[index].Done = !todos[index].Done
 	}
 

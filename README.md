@@ -23,7 +23,7 @@ godo list [-a]
 godo toggle [id id2 id3...]
 
 # Edit
-godo edit [id] -m "New name"
+godo edit [id] [-m "New name"]
 ```
 
 ## TODO
@@ -32,3 +32,4 @@ godo edit [id] -m "New name"
 - [x] Toggle feature
 - [ ] Edit feature
 - [ ] Use dbindex instead of array index
+- [ ] Use db instead of json file

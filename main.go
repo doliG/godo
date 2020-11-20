@@ -1,12 +1,13 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	flag "github.com/spf13/pflag"
 
 	"github.com/doliG/godo/db"
 	"github.com/doliG/godo/printer"
@@ -14,38 +15,48 @@ import (
 )
 
 func main() {
-	// https://gobyexample.com/command-line-subcommands
-	addCmd := flag.NewFlagSet("add", flag.ExitOnError)
-
-	listCmd := flag.NewFlagSet("list", flag.ExitOnError)
-	listAll := listCmd.Bool("a", false, "List all tasks, including done ones.")
-
-	toggleCmd := flag.NewFlagSet("toggle", flag.ExitOnError)
-
 	if len(os.Args) < 2 {
-		fmt.Println("expected 'foo' or 'bar' subcommands")
+		printUsage()
 		os.Exit(1)
 	}
 
 	switch os.Args[1] {
 	case "add":
+		addCmd := flag.NewFlagSet("add", flag.ExitOnError)
 		addCmd.Parse(os.Args[2:])
 		name := strings.Join(addCmd.Args(), " ")
 		add(name)
 
 	case "list":
+		listCmd := flag.NewFlagSet("list", flag.ExitOnError)
+		listAll := listCmd.BoolP("all", "a", false, "List all tasks, including done ones.")
 		listCmd.Parse(os.Args[2:])
 		list(*listAll)
 
 	case "toggle":
+		toggleCmd := flag.NewFlagSet("toggle", flag.ExitOnError)
 		toggleCmd.Parse(os.Args[2:])
 		ids := toggleCmd.Args()
 		toggle(ids)
 
+	case "edit":
+		editCmd := flag.NewFlagSet("edit", flag.ExitOnError)
+		editMessage := editCmd.StringP("message", "m", "", "New name for your task")
+		editCmd.Parse(os.Args[2:])
+		id := editCmd.Arg(0)
+		edit(id, *editMessage)
+
 	default:
-		fmt.Println("expected subcommands. Type ", os.Args[0], "help", "for help")
+		printUsage()
 		os.Exit(1)
 	}
+}
+
+func printUsage() {
+	fmt.Println("Godo Usage:")
+	fmt.Println("\tlist [--all, -a]")
+	fmt.Println("\tedit [id] [--message, -m name]")
+	fmt.Println("\ttoggle [id [id2, id3...]]")
 }
 
 func list(listAll bool) {
@@ -77,5 +88,23 @@ func toggle(ids []string) {
 		todos[index].Done = !todos[index].Done
 	}
 
+	db.UpdateAll(todos)
+}
+
+func edit(id string, newName string) {
+	todos := db.GetAll()
+
+	index, err := strconv.Atoi(id)
+	if err != nil {
+		color.Warn.Tips("Cannot convert '%s' into number. Skipping...", id)
+	} else if index < 0 || index >= len(todos) {
+		color.Warn.Tips("Invalid id '%s'. It must be  >0 and <%d. Skipping...", id, len(todos))
+	}
+	if len(newName) == 0 {
+		color.Error.Println("You must specify a new name with -m option.")
+		os.Exit(1)
+	}
+
+	todos[index].Name = newName
 	db.UpdateAll(todos)
 }

@@ -17,10 +17,9 @@ func PrintAll(items []db.Todo, printAll bool) {
 }
 
 func Print(index int, item db.Todo) {
-	created := item.Created.Format("02 Jan, 15:04")
 	if item.Done {
-		color.Gray.Printf("%d. %s: (done) %s\n", index, created, item.Name)
+		color.Gray.Printf("%d. %s\n", index, item.Name)
 	} else {
-		fmt.Printf("%d. %s : %s\n", index, created, item.Name)
+		fmt.Printf("%d. %s\n", index, item.Name)
 	}
 }

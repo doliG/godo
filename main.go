@@ -31,7 +31,8 @@ func main() {
 		listCmd := flag.NewFlagSet("list", flag.ExitOnError)
 		listAll := listCmd.BoolP("all", "a", false, "List all tasks, including done ones.")
 		listCmd.Parse(os.Args[2:])
-		list(*listAll)
+		query := listCmd.Arg(0)
+		list(query, *listAll)
 
 	case "toggle":
 		toggleCmd := flag.NewFlagSet("toggle", flag.ExitOnError)
@@ -54,14 +55,27 @@ func main() {
 
 func printUsage() {
 	fmt.Println("Godo Usage:")
-	fmt.Println("\tlist [--all, -a]")
-	fmt.Println("\tedit [id] [--message, -m name]")
+	fmt.Println("\tlist   [query] [--all, -a]")
+	fmt.Println("\tadd    [name]")
+	fmt.Println("\tedit   [id] [--message, -m name]")
 	fmt.Println("\ttoggle [id [id2, id3...]]")
 }
 
-func list(listAll bool) {
+func list(query string, listAll bool) {
 	todos := db.GetAll()
-	printer.PrintAll(todos, listAll)
+
+	var toShow []db.Todo
+	if len(query) > 0 {
+		for _, item := range todos {
+			if strings.Contains(item.Name, query) {
+				toShow = append(toShow, item)
+			}
+		}
+	} else {
+		toShow = todos
+	}
+
+	printer.PrintAll(toShow, listAll)
 }
 
 func add(name string) {

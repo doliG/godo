@@ -33,3 +33,5 @@ godo edit [id] [-m "New name"]
 - [ ] Edit feature
 - [ ] Use dbindex instead of array index
 - [ ] Use db instead of json file
+- [ ] Doc: how to install
+- [ ] Doc: how to use

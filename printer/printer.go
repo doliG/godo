@@ -18,8 +18,8 @@ func PrintAll(items []db.Todo, printAll bool) {
 
 func Print(index int, item db.Todo) {
 	if item.Done {
-		color.Gray.Printf("%d. %s\n", index, item.Name)
+		color.C256(244).Printf("%d. [✔] %s\n", index, item.Name)
 	} else {
-		fmt.Printf("%d. %s\n", index, item.Name)
+		fmt.Printf("%d. [ ] %s\n", index, item.Name)
 	}
 }

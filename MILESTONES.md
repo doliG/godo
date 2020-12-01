@@ -6,6 +6,7 @@
 - [ ] User settings (custom print of task)
 - [ ] Can we use "#", "@" and "+" for shiny features ? I.E tag, referencing a contact...
 - [ ] Feat: "clean" or "flush" command which deletes done todos (archive ?)
+- [ ] Feat: add an alias "t" instead of "welldone"
 
 ## v1
 - [ ] Feat: Use db instead of json file
@@ -19,6 +20,6 @@
 - [x] Use dbindex instead of array index
 - [x] Find a better name for this program
 - [x] Change the name of this package to "welldone"
-- [ ] Feat: One line install (reference: fzf)
-- [ ] Doc: how to install
-- [ ] Doc: how to use
+- [x] Doc: how to use
+- [x] Doc: how to install
+- [x] Feat: One line install (reference: fzf)

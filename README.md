@@ -4,6 +4,35 @@ Welldone is a CLI todolist.
 
 ## 🚀 Quickstart
 
+Prerequisite: You need to have [Go 1.15.5](https://golang.org/dl/) or higher on your computer.
+
+### Install script
+
+```bash
+curl "monscript" | bash
+```
+
+### Manual installation
+
+```bash
+go get -u github.com/doliG/welldone
+go install github.com/doliG/welldone
+welldone version
+# Should print "welldone vX"
+```
+
+**Troubleshooting**
+
+zsh: command not found: welldone
+
+Just make sure that `GOPATH` is in your env. If not:
+```
+echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc
+source ~/.zshrc
+# Or ".bashrc" or any ".rc" that you use to configure your shell.
+```
+
+
 <!-- ```
 brew install godo
 ``` -->
@@ -12,16 +41,16 @@ brew install godo
 
 ```bash
 # Add a todo
-godo add "Do something"
+welldone add "Do something"
 
 # List todos
-godo list [-a]
+welldone list [-a]
 
 # Mark as done / undone
-godo toggle [id id2 id3...]
+welldone toggle [id id2 id3...]
 
 # Edit
-godo edit [id] [-m "New name"]
+welldone edit [id] [-m "New name"]
 ```
 
 ## ℹ️ What's next ?

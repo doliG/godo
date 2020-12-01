@@ -1,4 +1,4 @@
-module github.com/doliG/godo
+module github.com/doliG/welldone
 
 go 1.15
 

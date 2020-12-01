@@ -3,7 +3,7 @@ package printer
 import (
 	"fmt"
 
-	"github.com/doliG/godo/db"
+	"github.com/doliG/welldone/db"
 	"github.com/gookit/color"
 )
 

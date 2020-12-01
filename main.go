@@ -9,8 +9,8 @@ import (
 
 	flag "github.com/spf13/pflag"
 
-	"github.com/doliG/godo/db"
-	"github.com/doliG/godo/printer"
+	"github.com/doliG/welldone/db"
+	"github.com/doliG/welldone/printer"
 	"github.com/gookit/color"
 )
 

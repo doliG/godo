@@ -4,6 +4,16 @@ CLI interface for managing todolist.
 
 ## Quickstart
 
+At the moment, we only have a version for "developper", meaning you have some knowledge of what a package manager is, and is used to CLI.
+
+We will work on a proper installation with a package manager in the future, maybe with version 2 or 3.
+
+**Requirements:**
+
+- You must have go version 1.15 or higher installed. [> Install Go](https://golang.org/dl/)
+
+**Then, run:**
+
 ```
 # Install
 
@@ -26,20 +36,8 @@ godo toggle [id id2 id3...]
 godo edit [id] [-m "New name"]
 ```
 
-## Milestones
+## What's next ?
 
-### v1
-- [ ] Find where to put the db file
-- [ ] Find a better name for this program
-- [x] Toggle feature
-- [x] Edit feature
-- [x] Use dbindex instead of array index
-- [ ] Feat: One line install (reference: fzf)
-- [ ] Doc: how to install
-- [ ] Doc: how to use
+I do have a lot of stuff to do, and a lot of ideas. If you're interessed in develpment of this package, feel free to open an issue or a PR.
 
-### v2
-- [ ] Feat: Use db instead of json file
-  - [ ] Learn SQLITE
-  - [ ] Use query instead of for loop
-  - [ ] Add a func to search in DB
+\> Read more in [MILESTONES.md](./MILESTONES.md) 

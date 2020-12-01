@@ -47,32 +47,37 @@ func main() {
 		id := editCmd.Arg(0)
 		edit(id, *editMessage)
 
+	case "version":
+		version()
+
 	default:
 		printUsage()
-		os.Exit(1)
 	}
 }
 
 func printUsage() {
-	fmt.Println("Godo Usage:")
-	fmt.Println("\tlist   [query] [--all, -a]")
-	fmt.Println("\tadd    [name]")
-	fmt.Println("\tedit   [id] [--message, -m name]")
-	fmt.Println("\ttoggle [id [id2, id3...]]")
+	fmt.Printf(`Welldone is a CLI todolist.
+Usage:
+	list     [query] [--all, -a]         List todos
+	add      [name]                      Add a todo
+	edit     [id] [--message, -m name]   Edit the name of the todo with the given id
+	toggle   [id [id2, id3...]]          Mark an idea as done if its not, undone otherwise
+	version                              Print the current version
+`)
+	os.Exit(0)
 }
 
 func list(query string, listAll bool) {
 	todos := db.GetAll()
+	toShow := todos
 
-	var toShow []db.Todo
 	if len(query) > 0 {
+		toShow = []db.Todo{}
 		for _, item := range todos {
 			if strings.Contains(item.Name, query) {
 				toShow = append(toShow, item)
 			}
 		}
-	} else {
-		toShow = todos
 	}
 
 	printer.PrintAll(toShow, listAll)
@@ -108,6 +113,7 @@ func toggle(ids []string) {
 func edit(id string, newName string) {
 	todos := db.GetAll()
 
+	// TODO: Maybe it can be done by CLI parser ?
 	index, err := strconv.Atoi(id)
 	if err != nil {
 		color.Warn.Tips("Cannot convert '%s' into number. Skipping...", id)
@@ -121,4 +127,10 @@ func edit(id string, newName string) {
 
 	todos[index].Name = newName
 	db.UpdateAll(todos)
+}
+
+func version() {
+	progname := "welldone"
+	version := "0"
+	fmt.Printf("%s v%s\n", progname, version)
 }

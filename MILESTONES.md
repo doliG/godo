@@ -22,4 +22,4 @@
 - [x] Change the name of this package to "welldone"
 - [x] Doc: how to use
 - [x] Doc: how to install
-- [x] Feat: One line install (reference: fzf)
+- [x] Feat: One line install (reference: brew)

@@ -9,7 +9,7 @@ Prerequisite: You need to have [Go 1.15.5](https://golang.org/dl/) or higher on 
 ### Install script
 
 ```bash
-curl "monscript" | bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/doliG/welldone/main/install.sh)"
 ```
 
 ### Manual installation
@@ -17,8 +17,6 @@ curl "monscript" | bash
 ```bash
 go get -u github.com/doliG/welldone
 go install github.com/doliG/welldone
-welldone version
-# Should print "welldone vX"
 ```
 
 **Troubleshooting**
